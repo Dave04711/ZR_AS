@@ -16,18 +16,38 @@ public class AgentSpawn : MonoBehaviour
     private List<GameObject> agents = new List<GameObject>();
     [SerializeField] private GameObject agentPrefab;
     [SerializeField] private int maxAmount = 30;
-    [Header("Grid")]
-    [SerializeField] private Vector2 size = Vector2.one;
-    [Header("Movement")]
-    [SerializeField] private float movementSpeed = 1;
     [Header("Names")]
     [SerializeField] private string[] adjectives;
     [SerializeField] private string[] nouns;
 
+    private AgentsMovement movement;
+    private WaitForSeconds interval;
+
+    private IEnumerator Start()
+    {
+        movement = GameManager.Instance.AgentsMovement;
+        spawnCount = Random.Range(spawnMin, spawnMax + 1);
+        SetInterval();
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+            SpawnAgent();
+        }
+
+        while (agents.Count < maxAmount)
+        {
+            yield return interval;
+            SpawnAgent();
+            SetInterval();
+        }
+    }
+
     public void SpawnAgent()
     {
         var newAgent = Instantiate(agentPrefab, parent);
-        newAgent.transform.position = new Vector3(Random.Range(-size.x, size.x), 0, Random.Range(-size.y, size.y));
+        newAgent.transform.position = new Vector3(Random.Range(-movement.MapSize.x, movement.MapSize.x), 0, Random.Range(-movement.MapSize.y, movement.MapSize.y));
+        agents.Add(newAgent);
+
         if(adjectives.Length == 0 || nouns.Length == 0 )
         {
             newAgent.name = "Bob";
@@ -35,4 +55,16 @@ public class AgentSpawn : MonoBehaviour
         }
         newAgent.name = $"{adjectives[Random.Range(0, adjectives.Length)]}{nouns[Random.Range(0, nouns.Length)]}";
     }
+
+    private void SetInterval() => interval = new WaitForSeconds(Random.Range(waitTimeMin, waitTimeMax));
+
+#if UNITY_EDITOR
+
+    public void SpawnAgent_Editor()
+    {
+        movement = FindObjectOfType<AgentsMovement>();
+        SpawnAgent();
+    }
+
+#endif
 }

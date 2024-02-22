@@ -12,7 +12,7 @@ public class AgentSpawnInspector : Editor
 
         if (GUILayout.Button("Spawn Agent"))
         {
-            script.SpawnAgent();
+            script.SpawnAgent_Editor();
         }
     }
 }
