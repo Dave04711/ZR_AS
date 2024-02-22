@@ -1,6 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
@@ -11,6 +11,13 @@ public class Agent : MonoBehaviour
 
     private AgentsMovement movement;
     private Vector3 target;
+    private Callbacks callbacks;
+    private bool onMouseOver;
+
+    private void Awake()
+    {
+        callbacks = GetComponent<Callbacks>();
+    }
 
     private void Start()
     {
@@ -21,6 +28,7 @@ public class Agent : MonoBehaviour
     private void Update()
     {
         Move();
+        HandleRelease();
     }
 
     public void SetNewTarget()
@@ -35,5 +43,28 @@ public class Agent : MonoBehaviour
         {
             SetNewTarget();
         }
+    }
+
+    private void HandleRelease()
+    {
+        if (Input.GetMouseButtonDown(0) && !onMouseOver)
+        {
+            callbacks?.OnRelease?.Invoke();
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        onMouseOver = true;
+    }
+
+    private void OnMouseExit()
+    {
+        onMouseOver = false;
+    }
+
+    private void OnMouseDown()
+    {
+        callbacks?.OnClick?.Invoke();
     }
 }

@@ -7,7 +7,13 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 3;
     private int health;
-    [SerializeField] private int damage = 1;
+
+    private Callbacks callbacks;
+
+    private void Awake()
+    {
+        callbacks = GetComponent<Callbacks>();
+    }
 
     private void Start()
     {
@@ -16,25 +22,18 @@ public class Health : MonoBehaviour
 
     public void DealDamage(int _damage)
     {
+        callbacks?.OnHit?.Invoke();
+
         health -= _damage;
+
         if (health <= 0)
         {
             Die();
         }
-        //delegate
     }
 
     private void Die()
     {
         Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter(Collider _other)
-    {
-        Health health = _other.gameObject.GetComponent<Health>();
-        if (health != null)
-        {
-            health.DealDamage(damage);
-        }
     }
 }

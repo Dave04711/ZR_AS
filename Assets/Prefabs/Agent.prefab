@@ -93,7 +93,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5521003146791413192}
   - component: {fileID: 7534654570619806806}
+  - component: {fileID: 3709111306639181440}
   - component: {fileID: -7904056098635312791}
+  - component: {fileID: -32652094665914770}
   - component: {fileID: -7186810726889164722}
   - component: {fileID: 7811446509807316418}
   - component: {fileID: -2230833494423849678}
@@ -135,6 +137,18 @@ MonoBehaviour:
   customSpeed: 0
   customSpeedValue: 5
   threshold: 0.015
+--- !u!114 &3709111306639181440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082549757863884930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ed78cbc7335574fb6b4750e37db202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-7904056098635312791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +162,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  health: 0
+--- !u!114 &-32652094665914770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082549757863884930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072b166640c27cd41a947fc9c33e2cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   damage: 1
 --- !u!114 &-7186810726889164722
 MonoBehaviour:
@@ -162,6 +187,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81dc834bd27522048a9a3f6dbc0fcdd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ren: {fileID: 4997291581793971061}
+  normal: {r: 0.21960784, g: 0.67058825, b: 0.91764706, a: 1}
+  selected: {r: 0.89472437, g: 0.91764706, b: 0.21960783, a: 1}
+  onHit: {r: 0.91764706, g: 0.21960783, b: 0.26138297, a: 1}
 --- !u!136 &7811446509807316418
 CapsuleCollider:
   m_ObjectHideFlags: 0
