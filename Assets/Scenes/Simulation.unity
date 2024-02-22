@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f378b66843a0e3b4281c6a41cdb28771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultSpeed: 1
+  DefaultSpeed: 4
   mapSize: {x: 10, y: 10}
 --- !u!114 &387515205
 MonoBehaviour:

@@ -36,9 +36,4 @@ public class Agent : MonoBehaviour
             SetNewTarget();
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-    }
 }
