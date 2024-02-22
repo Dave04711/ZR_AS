@@ -45,7 +45,7 @@ public class AgentSpawn : MonoBehaviour
     public void SpawnAgent()
     {
         var newAgent = Instantiate(agentPrefab, parent);
-        newAgent.transform.position = new Vector3(Random.Range(-movement.MapSize.x, movement.MapSize.x), 0, Random.Range(-movement.MapSize.y, movement.MapSize.y));
+        newAgent.transform.position = movement.RandomPoint;
         agents.Add(newAgent);
 
         if(adjectives.Length == 0 || nouns.Length == 0 )

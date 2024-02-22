@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultSpeed: 1
-  MapSize: {x: 10, y: 10}
+  mapSize: {x: 10, y: 10}
 --- !u!114 &387515205
 MonoBehaviour:
   m_ObjectHideFlags: 0
