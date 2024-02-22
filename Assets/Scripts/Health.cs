@@ -7,6 +7,8 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 3;
     private int health;
+    public int CurrentHealth => health;
+    public int MaxHealth => maxHealth;
 
     private Callbacks callbacks;
 
@@ -18,6 +20,8 @@ public class Health : MonoBehaviour
     private void Start()
     {
         health = maxHealth;
+
+        callbacks.OnClick += SetUI;
     }
 
     public void DealDamage(int _damage)
@@ -35,5 +39,10 @@ public class Health : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void SetUI()
+    {
+        GameManager.Instance.UI.ShowAgentUI(this);
     }
 }

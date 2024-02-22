@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/StyleSheet.uss?fileID=7433441132597879392&amp;guid=12211c3419511854b9e563c364c0149a&amp;type=3#StyleSheet" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: column; width: 50%; align-items: stretch; align-self: center;">
+        <ui:ProgressBar value="3" title="Name" name="AgentData" high-value="3" class="Progressbar text unity-progress-bar__container" style="min-width: 25%;" />
+    </ui:VisualElement>
+</ui:UXML>
