@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     public int MaxHealth => maxHealth;
 
     private Callbacks callbacks;
+    private UIHandler UI;
 
     private void Awake()
     {
@@ -19,9 +20,12 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        health = maxHealth;
+        UI = GameManager.Instance.UI;
+    }
 
-        callbacks.OnClick += SetUI;
+    private void OnEnable()
+    {
+        health = maxHealth;
     }
 
     public void DealDamage(int _damage)
@@ -38,11 +42,6 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
-    }
-
-    private void SetUI()
-    {
-        GameManager.Instance.UI.ShowAgentUI(this);
+        gameObject.SetActive(false);
     }
 }

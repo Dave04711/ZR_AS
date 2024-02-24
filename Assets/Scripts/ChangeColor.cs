@@ -26,6 +26,11 @@ public class ChangeColor : MonoBehaviour
         callbacks.OnHit += OnHit;
     }
 
+    private void OnDisable()
+    {
+        OnRelease();
+    }
+
     private void SetColor(ColorType _color)
     {
         ren.GetPropertyBlock(mpb);

@@ -34,7 +34,7 @@ public class AgentSpawn : MonoBehaviour
             SpawnAgent();
         }
 
-        while (agents.Count < maxAmount)
+        while (true)
         {
             yield return interval;
             SpawnAgent();
@@ -44,9 +44,19 @@ public class AgentSpawn : MonoBehaviour
 
     public void SpawnAgent()
     {
-        var newAgent = Instantiate(agentPrefab, parent);
+        if (!CanSpawn()) { return; }
+
+        GameObject newAgent = NewAgent();
+
+        if (newAgent == null)
+        {
+            newAgent = Instantiate(agentPrefab, parent);
+            agents.Add(newAgent);
+        }
+
+        newAgent.SetActive(true);
         newAgent.transform.position = movement.RandomPoint;
-        agents.Add(newAgent);
+        
 
         if(adjectives.Length == 0 || nouns.Length == 0 )
         {
@@ -54,6 +64,25 @@ public class AgentSpawn : MonoBehaviour
             return;
         }
         newAgent.name = $"{adjectives[Random.Range(0, adjectives.Length)]}{nouns[Random.Range(0, nouns.Length)]}";
+
+        bool CanSpawn()
+        {
+            int c = 0;
+            for (int i = 0; i < agents.Count; i++)
+            {
+                if (agents[i].activeInHierarchy) { c++; }
+            }
+            return c < maxAmount;
+        }
+
+        GameObject NewAgent()
+        {
+            for (int i = 0; i < agents.Count; i++)
+            {
+                if (!agents[i].activeInHierarchy) { return agents[i]; }
+            }
+            return null;
+        }
     }
 
     private void SetInterval() => interval = new WaitForSeconds(Random.Range(waitTimeMin, waitTimeMax));
@@ -64,6 +93,15 @@ public class AgentSpawn : MonoBehaviour
     {
         movement = FindObjectOfType<AgentsMovement>();
         SpawnAgent();
+    }
+
+    public void RemoveAgents_Editor()
+    {
+        for (int i = parent.childCount; i > 0; --i)
+        {
+            DestroyImmediate(parent.GetChild(0).gameObject);
+        }
+        agents.Clear();
     }
 
 #endif
