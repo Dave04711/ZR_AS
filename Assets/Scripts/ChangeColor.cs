@@ -51,6 +51,11 @@ public class ChangeColor : MonoBehaviour
         ren.GetPropertyBlock(mpb);
         Color previousColor = mpb.GetColor(colorProperty);
 
+        if (previousColor == onHit)
+        {
+            return;
+        }
+
         mpb.SetColor(colorProperty,
             _color switch
             {

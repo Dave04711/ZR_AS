@@ -17,8 +17,8 @@ public class AgentSpawn : MonoBehaviour
     [SerializeField] private GameObject agentPrefab;
     [SerializeField] private int maxAmount = 30;
     [Header("Names")]
-    [SerializeField] private string[] adjectives;
-    [SerializeField] private string[] nouns;
+    public string[] adjectives;
+    public string[] nouns;
 
     private AgentsMovement movement;
     private WaitForSeconds interval;
@@ -63,7 +63,9 @@ public class AgentSpawn : MonoBehaviour
             newAgent.name = "Bob";
             return;
         }
-        newAgent.name = $"{adjectives[Random.Range(0, adjectives.Length)]}{nouns[Random.Range(0, nouns.Length)]}";
+        string newName = $"{adjectives[Random.Range(0, adjectives.Length)]}{nouns[Random.Range(0, nouns.Length)]}";
+        newName = newName.Replace("\n", "").Replace("\r", "");
+        newAgent.name = newName;
 
         bool CanSpawn()
         {
